@@ -1,161 +1,163 @@
 import { Component } from '@angular/core';
 import { NgModel } from '@angular/forms';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
 
-  pawnX: number | null = null;
-  pawnY: number | null = null;
-  pawnDirection: string | null = null;
-  pawnColor: string | null = null;
-  reportGen: string = '';
-  isFirstVisit : boolean = false;
-  inputVal : string | null = null;
+	pawnXCor: number | null = null;
+	pawnYCor: number | null = null;
+	pawnDirection: string | null = null;
+	pawnColor: string | null = null;
+	reportGen: string = '';
+	isFirstVisit : boolean = false;
+	inputVal : string | null = null;
 
-  constructor(){
+	constructor(){
 
-  }
+	}
 
-  placePawn(x: number, y: number, direction: string, color: string) {
-    // CHECK TO STOP THE PAWN MOVING OUT OF THE BOARD
-    if (x < 0 || x > 7 || y < 0 || y > 7) {
-      return;
-    }
+	placePawn(x: number, y: number, direction: string, color: string) {
+		// CHECK TO STOP THE PAWN MOVING OUT OF THE BOARD
+		if (x < 0 || x > 7 || y < 0 || y > 7) {
+			return;
+		}
 
-    // AFTER CHECKING SETTING PAWN POSITION
-    this.pawnX = x;
-    this.pawnY = y;
-    this.pawnDirection = direction;
-    this.pawnColor = color;
-    console.log(this.pawnX,this.pawnY,this.pawnDirection,this.pawnColor);
-    
-  }
+		// AFTER CHECKING SETTING PAWN POSITION
+		this.pawnXCor = x;
+		this.pawnYCor = y;
+		this.pawnDirection = direction;
+		this.pawnColor = color;
 
-  movePawn() {
-    // CHECKING IF PAWN IS REALLY ON THE BOARD AND AFTER MOVING ITS NOT FALLING OFF
-    if (this.pawnX === null || this.pawnY === null) {
-      return;
-    }
+	}
 
-    let newX = this.pawnX;
-    let newY = this.pawnY;
+	movePawn() {
+		// CHECKING IF PAWN IS REALLY ON THE BOARD AND AFTER MOVING ITS NOT FALLING OFF
+		if (this.pawnXCor === null || this.pawnYCor === null) {
+			return;
+		}
 
-    // CALCULATING THE VALUE OF PAWN
-    switch (this.pawnDirection) {
-      case 'NORTH':
-        newY += 1;
-        break;
-      case 'SOUTH':
-        newY -= 1;
-        break;
-      case 'EAST':
-        newX += 1;
-        break;
-      case 'WEST':
-        newX -= 1;
-        break;
-    }
+		let newX = this.pawnXCor;
+		let newY = this.pawnYCor;
 
-    if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
-      return;
-    }
+		// CALCULATING THE VALUE OF PAWN
+		switch (this.pawnDirection) {
+			case 'NORTH':
+				newY += 1;
+				break;
+			case 'SOUTH':
+				newY -= 1;
+				break;
+			case 'EAST':
+				newX += 1;
+				break;
+			case 'WEST':
+				newX -= 1;
+				break;
+		}
 
-    // UPDATE THE PAWN DIRECTION
-    this.pawnX = newX;
-    this.pawnY = newY;
-  }
+		if (newX < 0 || newX > 7 || newY < 0 || newY > 7) {
+			return;
+		}
 
-  rotateLeft() {
-    // CHECKING IF PAWN IS ON BOARD
-    if (this.pawnX === null || this.pawnY === null) {
-      return;
-    }
+		// UPDATE THE PAWN DIRECTION
+		this.pawnXCor = newX;
+		this.pawnYCor = newY;
+	}
 
-    // CHANGING PAWN'S DIRECTION
-    switch (this.pawnDirection) {
-      case 'NORTH':
-        this.pawnDirection = 'WEST';
-        break;
-      case 'SOUTH':
-        this.pawnDirection = 'EAST';
-        break;
-      case 'EAST':
-        this.pawnDirection = 'NORTH';
-        break;
-      case 'WEST':
-        this.pawnDirection = 'SOUTH';
-        break;
-    }
-  }
+	rotateToLeft() {
+		// CHECKING IF PAWN IS ON BOARD
+		if (this.pawnXCor === null || this.pawnYCor === null) {
+			return;
+		}
 
-  rotateRight() {
-    // CHECKING IF PAWN IS ON BOARD
-    if (this.pawnX === null || this.pawnY === null) {
-      return;
-    }
+		// CHANGING PAWN'S DIRECTION
+		switch (this.pawnDirection) {
+			case 'NORTH':
+				this.pawnDirection = 'WEST';
+				break;
+			case 'SOUTH':
+				this.pawnDirection = 'EAST';
+				break;
+			case 'EAST':
+				this.pawnDirection = 'NORTH';
+				break;
+			case 'WEST':
+				this.pawnDirection = 'SOUTH';
+				break;
+		}
+	}
 
-    // CHANGING PAWN'S DIRECTION
-    switch (this.pawnDirection) {
-      case 'NORTH':
-        this.pawnDirection = 'EAST';
-        break;
-      case 'SOUTH':
-        this.pawnDirection = 'WEST';
-        break;
-      case 'EAST':
-        this.pawnDirection = 'SOUTH';
-        break;
-      case 'WEST':
-        this.pawnDirection = 'NORTH';
-        break;
-    }
-  }
+	rotateToRight() {
+		// CHECKING IF PAWN IS ON BOARD
+		if (this.pawnXCor === null || this.pawnYCor === null) {
+			return;
+		}
 
-  run(e:any){
-    if(e.code === "Enter"){
-      this.report(this.inputVal);
-    }
-  }
+		// CHANGING PAWN'S DIRECTION
+		switch (this.pawnDirection) {
+			case 'NORTH':
+				this.pawnDirection = 'EAST';
+				break;
+			case 'SOUTH':
+				this.pawnDirection = 'WEST';
+				break;
+			case 'EAST':
+				this.pawnDirection = 'SOUTH';
+				break;
+			case 'WEST':
+				this.pawnDirection = 'NORTH';
+				break;
+		}
+	}
 
-  report(value:any) {
-    // EMPTYING THE VALUES OF THE REPORT AREA & INPUT BOX
-    this.reportGen = "";
-    value = value.toUpperCase().trim();
-    this.inputVal = ""
+	run(e:any){
+		if(e.code === "Enter"){
+			this.report(this.inputVal);
+		}
+	}
 
-    // CHECKING FOR THE FIRST COMMAND AS PLACE COMMAND
-    if( !this.isFirstVisit && !value.includes('PLACE')) {
-      this.reportGen = "Please Enter Correct Command"
-    }else {
-      // CHECKING IF VALUES IN PLACE COMMAND ARE CORRECT OR NOT
-      if(value.includes('PLACE')){
-        let spliceString = value.split(' ');
-        let valueVar = spliceString[1].split(',');
-        if(valueVar.length == 4) {
-          this.reportGen = "";
-          this.isFirstVisit = true;
-          this.placePawn(+valueVar[0],+valueVar[1],valueVar[2],valueVar[3]);
-        }
-        else {
-          this.reportGen = "Please Enter Correct Command"
-        }
-       }
-      // CALLING FUNCTIONALITY BASED ON THE COMMAND
-       else if(value.includes('MOVE')){
-        this.movePawn();
-       }
-       else if(value.includes('LEFT')){
-        this.rotateLeft();
-       }
-       else if(value.includes('RIGHT')){
-        this.rotateRight();
-       }
-       else if(value.includes('REPORT')){
-        this.reportGen = this.pawnX + "," + this.pawnY + "," + this.pawnDirection  + "," + this.pawnColor;
-       }
-    }
-  }
+	report(value:any) {
+		// EMPTYING THE VALUES OF THE REPORT AREA & INPUT BOX
+		this.reportGen = "";
+		value = value.toUpperCase().trim();
+		this.inputVal = ""
+
+		// CHECKING FOR THE FIRST COMMAND AS PLACE COMMAND
+
+		if( !this.isFirstVisit && !value.includes('PLACE')) {
+			this.reportGen = "Please Enter Correct Command"
+		} else {
+			// CHECKING IF VALUES IN PLACE COMMAND ARE CORRECT OR NOT
+			if(value.includes('PLACE')){
+				let spliceString = value.split(' ');
+				let valueVar = spliceString[1].split(',');
+				if(valueVar.length == 4) {
+					this.reportGen = "";
+					this.isFirstVisit = true;
+					this.placePawn(+valueVar[0],+valueVar[1],valueVar[2],valueVar[3]);
+				}
+				else {
+					this.reportGen = "Please Enter Correct Command"
+				}
+			 }
+			
+			 // CALLING FUNCTIONALITY BASED ON THE COMMAND
+
+			 else if(value.includes('MOVE')){
+				this.movePawn();
+			 }
+			 else if(value.includes('LEFT')){
+				this.rotateToLeft();
+			 }
+			 else if(value.includes('RIGHT')){
+				this.rotateToRight();
+			 }
+			 else if(value.includes('REPORT')){
+				this.reportGen = this.pawnXCor + "," + this.pawnYCor + "," + this.pawnDirection  + "," + this.pawnColor;
+			 }
+		}
+	}
 }
