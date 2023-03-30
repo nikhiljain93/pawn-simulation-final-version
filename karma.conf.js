@@ -23,7 +23,7 @@ module.exports = function (config) {
     
     coverageIstanbulReporter: {
       reports: ['html', 'lcovonly', 'text-summary'],
-      dir: require('path').join(__dirname, './coverage/pawn-simulation'),
+      dir: require('path').join(__dirname, './coverage/pawn-simulation-final-version'),
       subdir: '.',
       reporters: [
         { type: 'html' },
