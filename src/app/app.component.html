@@ -1,0 +1,15 @@
+ <div>
+  <div id="container">
+    <div class="img_div">
+      <img src="../assets/curve_logo.png" alt="Curve Tomorrow" class="img_cls">
+    </div>
+    <label for="command-input">Enter command:</label>
+    <input type="text" id="command-input" placeholder="e.g. PLACE 0,0,NORTH,WHITE" #inputVar [(ngModel)] = "inputVal" (keypress)="run($event)"/>
+
+    <button id="run-btn" class = "mar-left" (click)="report(inputVar.value)">RUN</button>
+
+    <div id="output">
+      {{reportGen}}
+    </div>
+  </div>
+ </div>
